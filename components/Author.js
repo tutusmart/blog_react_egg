@@ -5,9 +5,9 @@ const Author =()=>{
 
     return (
         <div className="author-div comm-box">
-            <div> <Avatar size={100} src="http://blogimages.jspang.com/blogtouxiang1.jpg"  /></div>
+            <div> <Avatar size={100} src="https://i2.hdslb.com/bfs/archive/4adbdb6043f054d904237fc5e1f391daade39a29.jpg@336w_190h.webp"  /></div>
             <div className="author-introduction">
-                光头程序员，专注于WEB和移动前端开发。要录1000集免费前端视频的傻X。此地维权无门，此时无能为力，此心随波逐流。
+                sdhfs的哥代购的价格的哥规格结核杆菌阖家团聚航天局然后他就让他
                 <Divider>社交账号</Divider>
                 <Avatar size={28} icon="github" className="account"  />
                 <Avatar size={28} icon="qq"  className="account" />
