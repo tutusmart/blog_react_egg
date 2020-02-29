@@ -9,6 +9,8 @@ import Footer from "../components/Footer";
 import "../static/style/pages/detailed.css";
 import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
+import axios from "axios"
+
 let markdown='# P01:课程介绍和环境搭建\n' +
   '[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
   '> Mditor 是一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器，仅此而已... \n\n' +
@@ -23,10 +25,13 @@ let markdown='# P01:课程介绍和环境搭建\n' +
   '>> bbbbbbbbb\n' +
   '>>> cccccccccc\n\n'+
   '``` var a=11; ```'
-const Detailed = () => (
+const Detailed = (data) => {
+  console.log(data)
+  
+  return (  
   <>
     <Head>
-      <title>博客详细页</title>
+    <title>博客详细页</title>
     </Head>
     <Header />
     <Row className="comm-main" type="flex" justify="center">
@@ -44,24 +49,24 @@ const Detailed = () => (
 
           <div>
             <div className="detailed-title">
-              React实战视频教程-技术胖Blog开发(更新08集)
+              {data.introduce}
             </div>
 
             <div className="list-icon center">
               <span>
-                <Icon type="calendar" /> 2019-06-28
+                <Icon type="calendar" /> 
               </span>
               <span>
-                <Icon type="folder" /> 视频教程
+                <Icon type="folder" /> {data.type}
               </span>
               <span>
-                <Icon type="fire" /> 5498人
+                <Icon type="fire" /> {data.view_count}
               </span>
             </div>
 
             <div className="detailed-content" >
                 <ReactMarkdown 
-                  source={markdown} 
+                  source={data.article_content} 
                   escapeHtml={false}  
                 />
             </div>
@@ -82,12 +87,26 @@ const Detailed = () => (
             />
         </div>
       </Affix>
-
-
       </Col>
     </Row>
     <Footer />
   </>
-);
+  );
+};
+
+Detailed.getInitialProps = async(context)=>{
+  
+  console.log(context.query.id)
+  let id =context.query.id
+  const promise = new Promise((resolve)=>{
+    axios('http://127.0.0.1:7001/default/getArticleById/'+id).then(
+      (res)=>{
+        resolve(res.data.data[0])
+      }
+    )
+  })
+
+  return await promise
+}
 
 export default Detailed;
