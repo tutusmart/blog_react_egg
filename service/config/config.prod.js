@@ -33,7 +33,7 @@ module.exports = appInfo => {
       // username
       user: 'root',
       // password
-      password: 'Lmd10432845..',
+      password: 'Lmd10432845',
       // database
       database: 'react_blog',
     },
@@ -50,13 +50,22 @@ module.exports = appInfo => {
     domainWhiteList: [ '*' ],
   };
 
+  config.cluster = {
+    listen: {
+      path: '',
+      port: 7001,
+      hostname: '0.0.0.0',
+    }
+   };
+
+
   // config.cors = {
   //   origin: '*',
   //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   // };
 
   config.cors = {
-    origin: 'http://localhost:3000', // 只允许这个域进行访问接口
+    origin: "*", // 只允许这个域进行访问接口
     credentials: true, // 开启认证  允许cook跨域
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };
