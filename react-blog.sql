@@ -11,7 +11,7 @@
 DROP TABLE IF EXISTS `admin_user`;
 CREATE TABLE `admin_user` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `userName` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -66,5 +66,5 @@ CREATE TABLE `type` (
 #
 
 /*!40000 ALTER TABLE `type` DISABLE KEYS */;
-INSERT INTO `type` VALUES (1,'视频教程',1,'youtube'),(2,'大胖逼逼叨',2,'message'),(3,'快乐生活',3,'smile');
+INSERT INTO `type` VALUES (1,'视频教程',1,'youtube'),(2,'javascript',2,'message'),(3,'热爱生活',3,'smile');
 /*!40000 ALTER TABLE `type` ENABLE KEYS */;

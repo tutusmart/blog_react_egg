@@ -35,11 +35,11 @@ const Header = () => {
                 <Col xs={24} sm={24} md={10} lg={13} xl={11}>
                     <span className="header-logo">
                         <Link href={{ pathname: '/index' }}>
-                            <a> 技术胖</a>
+                            <a> 涂图图</a>
                         </Link>
 
                     </span>
-                    <span className="header-txt">专注前端开发,每年100集免费视频。</span>
+                    <span className="header-txt">专注前端开发</span>
                 </Col>
 
                 <Col className="memu-div" xs={0} sm={0} md={14} lg={10} xl={7}>
@@ -52,10 +52,10 @@ const Header = () => {
                             博客首页
                         </Menu.Item>
                         {
-                            navArray.map((item) => {
+                            navArray.map((item,index) => {
                                 return (
-                                    <Menu.Item key={item.Id}>
-                                        <Icon type={item.icon} />
+                                    <Menu.Item key={item.id}>
+                                        <Icon type="home" />
                                         {item.typeName}
                                     </Menu.Item>
                                 )

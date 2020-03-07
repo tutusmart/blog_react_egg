@@ -4,9 +4,9 @@ import '../static/style/components/author.css'
 const Author =()=>{
     return (
         <div className="author-div comm-box">
-            <div> <Avatar size={100} src="http://blogimages.jspang.com/blogtouxiang1.jpg"  /></div>
+            <div> <Avatar size={100} src="https://dss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=1776348617,1397701647&fm=179&w=121&h=140&img.JPEG"  /></div>
             <div className="author-introduction">
-                光头程序员，专注于WEB和移动前端开发。要录1000集免费前端视频的傻X。此地维权无门，此时无能为力，此心随波逐流。
+                此地维权无门，此时无能为力，此心随波逐流。
                 <Divider>社交账号</Divider>
                 <Avatar size={28} icon="github" className="account"  />
                 <Avatar size={28} icon="qq"  className="account" />
