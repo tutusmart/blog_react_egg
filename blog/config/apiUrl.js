@@ -1,5 +1,4 @@
 let ipUrl = '';
-let ipUrl = '';
 
 if (process.env.NODE_ENV === 'production') {
     ipUrl = 'http://106.54.141.244:7001/default/'
