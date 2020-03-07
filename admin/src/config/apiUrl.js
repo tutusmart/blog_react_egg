@@ -1,9 +1,9 @@
 let ipUrl = '';
 
 if (process.env.NODE_ENV === 'production') {
-    ipUrl = 'blog/default/'
+    ipUrl = '/blog/default/'
 } else {
-    ipUrl = 'blog/default/'
+    ipUrl = '/blog/default/'
 }
 
 let servicePath = {
