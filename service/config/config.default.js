@@ -47,7 +47,7 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: [ 'http://blogadmin.tuwei.site' ],
+    domainWhiteList: [ '*'],
 
   };
 
@@ -57,7 +57,7 @@ module.exports = appInfo => {
   // };
 
   config.cors = {
-    origin: '*', // 只允许这个域进行访问接口
+    origin: ["http://localhost:3002"], // 只允许这个域进行访问接口
     credentials: true, // 开启认证  允许cook跨域
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };

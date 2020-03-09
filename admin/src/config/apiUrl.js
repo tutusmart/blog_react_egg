@@ -1,9 +1,9 @@
 let ipUrl = 'http://106.54.141.244:7001';
 
 if (process.env.NODE_ENV === 'production') {
-    ipUrl = 'http://106.54.141.244:7001/admin/'
+    ipUrl = '/apl/admin/'
 } else {
-    ipUrl = '/rest/admin/'
+    ipUrl = 'http://127.0.0.1:7002/admin/'
 }
 
 let servicePath = {
