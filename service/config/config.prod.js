@@ -47,7 +47,7 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: [ '*' ],
+    domainWhiteList: [ 'http://blogadmin.tuwei.site:80' ],
   };
 
   config.cluster = {
