@@ -47,7 +47,8 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: [ '*' ],
+    domainWhiteList: [ 'http://blogadmin.tuwei.site' ],
+
   };
 
   // config.cors = {
