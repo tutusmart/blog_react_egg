@@ -1,9 +1,9 @@
-let ipUrl = '';
+let ipUrl = 'http://106.54.141.244:7001';
 
 if (process.env.NODE_ENV === 'production') {
-    ipUrl = '/blog/default/'
+    ipUrl = 'http://106.54.141.244:7001/admin/'
 } else {
-    ipUrl = '/blog/default/'
+    ipUrl = '/rest/admin/'
 }
 
 let servicePath = {
