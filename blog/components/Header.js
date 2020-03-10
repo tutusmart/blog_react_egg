@@ -55,7 +55,7 @@ const Header = () => {
                             navArray.map((item,index) => {
                                 return (
                                     <Menu.Item key={item.id}>
-                                        <Icon type="home" />
+                                        <Icon type={item.icon} />
                                         {item.typeName}
                                     </Menu.Item>
                                 )

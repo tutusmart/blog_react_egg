@@ -190,7 +190,7 @@ function AddArticle(props) {
                         </Col>
                         <Col span={4}>
                             &nbsp;
-                            <Select defaultValue={selectedType} size="large" onChange={selectTypeHandler}>
+                            <Select style={{width:"98%"}} defaultValue={selectedType} size="large" onChange={selectTypeHandler}>
                                 {
                                     typeInfo.map((item, index) => {
                                         return (<Option key={index} value={item.id}>{item.typeName}</Option>)
@@ -232,6 +232,7 @@ function AddArticle(props) {
                         </Col>
                         <Col span={24}>
                             <br />
+                            <h3>文章简介：</h3>
                             <TextArea
                                 rows={4}
                                 value={introducemd}
@@ -242,13 +243,14 @@ function AddArticle(props) {
                             <br /><br />
                             <div
                                 className="introduce-html"
-                                dangerouslySetInnerHTML={{ __html: '文章简介：' + introducehtml }} >
+                                dangerouslySetInnerHTML={{ __html: introducehtml }} >
                             </div>
                         </Col>
 
                         <Col span={12}>
                             <div className="date-select">
                                 <DatePicker
+                                    style={{width:"100%"}}
                                     onChange={(date, dateString) => setShowDate(dateString)}
                                     placeholder="发布日期"
                                     size="large"

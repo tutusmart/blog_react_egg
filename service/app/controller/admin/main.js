@@ -46,6 +46,8 @@ class MainController extends Controller {
     //修改文章
     async updateArticle() {
         const tmpArticle = this.ctx.request.body
+        console.log(tmpArticle);
+        
         const result = await this.app.mysql.update('article', tmpArticle);
         const updateSuccess = result.affectedRows === 1;
         // console.log(updateSuccess)
@@ -59,9 +61,10 @@ class MainController extends Controller {
         let sql = 'SELECT article.id as id,' +
             'article.title as title,' +
             'article.introduce as introduce,' +
+            'article.view_count as view_count,' +
             "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime," +
             'type.typeName as typeName ' +
-            'FROM article LEFT JOIN type ON article.type_id = type.Id ' +
+            'FROM article LEFT JOIN type ON article.type_id = type.id ' +
             'ORDER BY article.id DESC '
         const resList = await this.app.mysql.query(sql)
         this.ctx.body = { list: resList }

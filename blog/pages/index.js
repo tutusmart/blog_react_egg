@@ -40,7 +40,8 @@ const Home = (list) => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>首页</title>
+        <link rel="icon" href="../static/bitbug_favicon.ico" type="image/x-icon"></link>
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">

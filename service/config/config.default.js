@@ -43,25 +43,24 @@ module.exports = appInfo => {
     agent: false,
   };
 
+  // config.security = {
+  //   csrf: {
+  //     enable: false,
+  //   },
+  //   domainWhiteList:['*'],
+  // };
+
   config.security = {
     csrf: {
       enable: false,
+      ignoreJSON: true
     },
-    domainWhiteList: [ '*'],
-
+    domainWhiteList:['*'],
   };
-
-  // config.cors = {
-  //   origin: '*',
-  //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
-  // };
-
   config.cors = {
-    origin: ["http://localhost:3002"], // 只允许这个域进行访问接口
-    credentials: true, // 开启认证  允许cook跨域
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+    credentials: true, 
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
   };
-
   return {
     ...config,
     ...userConfig,

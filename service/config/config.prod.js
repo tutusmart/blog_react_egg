@@ -59,15 +59,16 @@ module.exports = appInfo => {
    };
 
 
-  // config.cors = {
-  //   origin: '*',
-  //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
-  // };
-
+   config.security = {
+    csrf: {
+      enable: false,
+      ignoreJSON: true
+    },
+    domainWhiteList:['*'],
+  };
   config.cors = {
-    origin: ["127.0.0.1:3000","127.0.0.1:3001","127.0.0.1:3002"], // 只允许这个域进行访问接口
-    credentials: true, // 开启认证  允许cook跨域
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+    credentials: true, 
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
   };
 
   return {

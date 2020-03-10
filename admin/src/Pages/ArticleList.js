@@ -84,16 +84,16 @@ function ArticleList(props) {
                             <Col span={8}>
                                 {item.title}
                             </Col>
-                            <Col span={3}>
+                            <Col span={4}>
                                 {item.typeName}
                             </Col>
-                            <Col span={3}>
+                            <Col span={4}>
                                 {item.addTime}
                             </Col>
-                            <Col span={3}>
-                                共<span>{item.part_count}</span>集
-                            </Col>
-                            <Col span={3}>
+                            {/* <Col span={3}>
+                                共<span>{item.view_count}</span>集
+                            </Col> */}
+                            <Col span={4}>
                                 {item.view_count}
                             </Col>
 
