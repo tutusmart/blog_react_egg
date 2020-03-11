@@ -5,6 +5,8 @@ import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
+import '../static/style/pages/comm.css'
+
 import '../static/style/pages/list.css'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'

@@ -34,6 +34,8 @@ const Detailed = (props) => {
     breaks: false,
     smartLists: true,
     smartypants: false,
+    pedantic: false,
+    xhtml: false,
     highlight: function (code) {
       return hljs.highlightAuto(code).value;
     }

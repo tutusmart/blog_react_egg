@@ -14,6 +14,23 @@ body{
   border-radius: .3rem;
   border:1px solid #eee;
 }
+table{
+  width: 100%;
+  margin: 14px 0;
+}
+table tr td,table tr th{
+  font-weight: normal;
+  padding: 8px;
+  text-align: left;
+  vertical-align: middle;
+  border: 1px solid #dddddd;
+}
+/* table tr th{
+  background:#f1f1f1;
+} */
+table > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
 .comm-main{
   margin-top: .5rem;
 }
