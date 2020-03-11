@@ -16,19 +16,18 @@ function AddArticle(props) {
     const [introducemd, setIntroducemd] = useState()            //简介的markdown内容
     const [introducehtml, setIntroducehtml] = useState('等待编辑...') //简介的html内容
     const [showDate, setShowDate] = useState()   //发布日期
-    const [updateDate, setUpdateDate] = useState() //修改日志的日期
+    // const [updateDate, setUpdateDate] = useState() //修改日志的日期
     const [typeInfo, setTypeInfo] = useState([]) // 文章类别信息
     const [selectedType, setSelectType] = useState('请选择类型') //选择的文章类别
 
-    useEffect(() => {
+    useEffect((props) => {
         getTypeInfo()
         //获得文章ID
         let tmpId = props.match.params.id
         if (tmpId) {
             setArticleId(tmpId)
             getArticleById(tmpId)
-        }
-    }, [])
+    }}, [])
 
     const renderer = new marked.Renderer();
     marked.setOptions({
@@ -130,7 +129,7 @@ function AddArticle(props) {
         // dataProps.article_content_html = markdownContent
         // dataProps.introduce_html = introducehtml
 
-        if (articleId == 0) {
+        if (articleId === 0) {
             // console.log('articleId=:' + articleId)
             dataProps.view_count = Math.ceil(Math.random() * 100) + 1000
             axios({
