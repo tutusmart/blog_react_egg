@@ -9,7 +9,7 @@ const { confirm } = Modal;
 
 function ArticleList(props) {
     const [list, setList] = useState([])
-
+    
     useEffect(() => {
         getList()
     }, [])

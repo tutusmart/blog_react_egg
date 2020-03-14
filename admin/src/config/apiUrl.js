@@ -1,4 +1,4 @@
-let ipUrl = 'http://106.54.141.244:7001';
+let ipUrl = 'http://106.54.141.244:7001/admin/';
 
 if (process.env.NODE_ENV === 'production') {
     ipUrl = '/apl/admin/'
@@ -14,6 +14,7 @@ let servicePath = {
     getArticleList:ipUrl + 'getArticleList' ,  //  文章列表
     delArticle:ipUrl + 'delArticle/' ,  //  删除文章
     getArticleById:ipUrl + 'getArticleById/' ,  //  根据ID获得文章详情
+    addType : ipUrl + 'addType', //添加类别
 }
 
 export default servicePath;

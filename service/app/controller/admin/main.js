@@ -70,6 +70,13 @@ class MainController extends Controller {
         this.ctx.body = { list: resList }
     }
 
+    //添加类别
+    async addType() {
+        const tmpType = this.ctx.request.body
+        const res = await this.app.mysql.insert('type',tmpType);
+        this.ctx.body = { data: res }
+    }
+
     //删除文章
     async delArticle() {
         let id = this.ctx.params.id

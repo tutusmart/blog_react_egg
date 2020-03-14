@@ -20,10 +20,13 @@ function AddArticle(props) {
     const [typeInfo, setTypeInfo] = useState([]) // 文章类别信息
     const [selectedType, setSelectType] = useState('请选择类型') //选择的文章类别
 
-    useEffect((props) => {
-        getTypeInfo()
+    useEffect(() => {
+        getTypeInfo();
+        let tmpId;
         //获得文章ID
-        let tmpId = props.match.params.id
+        if(props.match.params){
+            tmpId = props.match.params.id
+        }
         if (tmpId) {
             setArticleId(tmpId)
             getArticleById(tmpId)
@@ -116,7 +119,7 @@ function AddArticle(props) {
             message.error('发布日期不能为空')
             return false
         }
-
+        
         let dataProps = {}
         console.log(selectedType)
         dataProps.type_id = selectedType
@@ -131,7 +134,7 @@ function AddArticle(props) {
 
         if (articleId === 0) {
             // console.log('articleId=:' + articleId)
-            dataProps.view_count = Math.ceil(Math.random() * 100) + 1000
+            dataProps.view_count = 0;
             axios({
                 method: 'post',
                 url: servicePath.addArticle,
@@ -150,7 +153,6 @@ function AddArticle(props) {
                 }
             )
         } else {
-            // console.log('articleId:' + articleId)
             dataProps.id = articleId
             axios({
                 method: 'post',

@@ -3,6 +3,7 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import { Route } from "react-router-dom";
 import AddArticle from './AddArticle'
 import ArticleList from './ArticleList'
+import Addtype from './Addtype'
 import '../static/css/AdminIndex.css'
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -18,7 +19,9 @@ function AdminIndex(props) {
   const handleClickArticle = e => {
     if (e.key === 'addArticle') {
       props.history.push('/index/add')
-    } else {
+    } else if (e.key === 'addtype'){
+      props.history.push('/index/typeList')
+    }else {
       props.history.push('/index/list')
     }
   }
@@ -29,14 +32,14 @@ function AdminIndex(props) {
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div className="logo" > 超级管理员 </div>
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-          {/* <Menu.Item key="1">
+          <Menu.Item key="1">
             <Icon type="pie-chart" />
             <span>工作台</span>
-          </Menu.Item> */}
-          {/* <Menu.Item key="2">
+          </Menu.Item>
+          <Menu.Item key="2">
             <Icon type="desktop" />
             <span>添加文章</span>
-          </Menu.Item> */}
+          </Menu.Item>
           <SubMenu
             key="sub1"
             onClick={handleClickArticle}
@@ -49,6 +52,7 @@ function AdminIndex(props) {
           >
             <Menu.Item key="addArticle">添加文章</Menu.Item>
             <Menu.Item key="articleList">文章列表</Menu.Item>
+            <Menu.Item key="addtype">文章类型</Menu.Item>
           </SubMenu>
           {/* <Menu.Item key="9">
             <Icon type="file" />
@@ -57,7 +61,9 @@ function AdminIndex(props) {
         </Menu>
       </Sider>
       <Layout>
-        <Header style={{ background: '#fff', padding: 0 }} />
+        <Header style={{ background: '#6282ca', color:"#ffffff", paddingLeft: "20px" }}> 
+        <h2 style={{color:"#fff"}}>博客后台管理系统</h2>
+        </Header>
         <Content style={{ margin: '0 16px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>后台管理</Breadcrumb.Item>
@@ -69,6 +75,7 @@ function AdminIndex(props) {
               <Route path="/index/add/" exact component={AddArticle} />
               <Route path="/index/add/:id" exact component={AddArticle} />
               <Route path="/index/list/" exact component={ArticleList} />
+              <Route path="/index/typeList/" exact component={Addtype} />
             </div>
           </div>
         </Content>

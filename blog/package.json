@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "rm -rf build && next build",
-    "start": "next start"
+    "start": "next start",
+    "server":"rm -rf build && next build && next start"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
