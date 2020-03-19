@@ -32,17 +32,17 @@ const Header = () => {
     return (
         <div className="header">
             <Row type="flex" justify="center">
-                <Col xs={24} sm={24} md={10} lg={13} xl={11}>
+                <Col xs={24} sm={24} md={10} lg={13} xl={8}>
                     <span className="header-logo">
                         <Link href={{ pathname: '/index' }}>
                             <a> 涂图图</a>
                         </Link>
 
                     </span>
-                    <span className="header-txt">专注前端开发</span>
+                    <span className="header-txt">前端开发工程师</span>
                 </Col>
 
-                <Col className="memu-div" xs={0} sm={0} md={14} lg={10} xl={7}>
+                <Col className="memu-div" xs={0} sm={0} md={14} lg={10} xl={10}>
                     <Menu
                         mode="horizontal"
                         onClick={handleClick}
