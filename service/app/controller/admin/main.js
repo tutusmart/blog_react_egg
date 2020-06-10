@@ -2,8 +2,10 @@
 const Controller = require('egg').Controller
 class MainController extends Controller {
     async index() {
-        //首页的文章列表数据
-        this.ctx.body = 'hi api'
+        //特使登陆
+        let openId = new Date().getTime()
+        this.ctx.session.openId={ 'openId':openId }
+        this.ctx.body='hi api'
     }
 
     // 判断用户名密码是否正确
@@ -58,16 +60,32 @@ class MainController extends Controller {
 
     //获得文章列表
     async getArticleList() {
-        let sql = 'SELECT article.id as id,' +
-            'article.title as title,' +
-            'article.introduce as introduce,' +
-            'article.view_count as view_count,' +
-            "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime," +
-            'type.typeName as typeName ' +
-            'FROM article LEFT JOIN type ON article.type_id = type.id ' +
-            'ORDER BY article.id DESC '
-        const resList = await this.app.mysql.query(sql)
-        this.ctx.body = { list: resList }
+        let pageSize = this.ctx.query.pageSize || 10;
+        let current = this.ctx.query.current || 1;
+        console.log(pageSize,current);
+        // SELECT COUNT(article.id) 
+        // FROM article LEFT JOIN type ON article.type_id = type.Id 
+        // WHERE 条件
+        let sql = 'SELECT article.id as id,'+
+                'article.title as title,'+
+                'article.introduce as introduce,'+
+                "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,"+
+                'type.typeName as typeName '+
+                'FROM article LEFT JOIN type ON article.type_id = type.Id '+
+                'ORDER BY article.id DESC ' + 
+                'LIMIT ' + pageSize * (current*1 - 1) + ',' + pageSize;;
+        let sqlcout = 'SELECT COUNT(article.id) as total FROM article';
+        const resList = await this.app.mysql.query(sql);
+        const coutnums = await this.app.mysql.query(sqlcout);
+        console.log(coutnums);
+        
+        this.ctx.body={
+            total:coutnums[0].total,
+            pageSize:pageSize*1,
+            current:current*1,
+            page:Math.ceil( coutnums[0].total / pageSize*1 ),
+            list:resList
+        }
     }
 
     //添加类别

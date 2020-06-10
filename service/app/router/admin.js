@@ -11,5 +11,4 @@ module.exports = app => {
     router.get('/admin/getArticleById/:id',adminauth,controller.admin.main.getArticleById)
     router.post('/admin/addType',adminauth,controller.admin.main.addType) //添加类别
 
-    
 }

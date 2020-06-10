@@ -1,32 +1,38 @@
 
 import React, { useState, useEffect } from 'react';
 import '../static/css/ArticleList.css'
-import { List, Row, Col, Modal, message, Button } from 'antd';
+import { List, Row, Col, Modal, message, Button ,Pagination} from 'antd';
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 const { confirm } = Modal;
-
+const pageSize = 10;
 
 function ArticleList(props) {
-    const [list, setList] = useState([])
+    const [list, setList] = useState([]);
+    const [total, setTotal] = useState(0);
+
     
     useEffect(() => {
         getList()
     }, [])
 
     //得到文章列表
-    const getList = () => {
+    const getList = (e) => {
+        var current = e || 1
         axios({
             method: 'get',
-            url: servicePath.getArticleList,
+            url: servicePath.getArticleList + "?pageSize=10&current=" + current,
             withCredentials: true,
             header: { 'Access-Control-Allow-Origin': '*' }
         }).then(
             res => {
-                setList(res.data.list)
-
+                setList(res.data.list);
+                setTotal(res.data.total);
             }
         )
+    }
+    const onChange = (e)=>{
+        getList(e);
     }
 
     //删除文章的方法
@@ -106,7 +112,9 @@ function ArticleList(props) {
                     </List.Item>
                 )}
             />
-
+            <Row className="tw-mrt30" type="flex" justify="center">
+                <Pagination onChange={onChange} total= {total} pageSize={pageSize}/>
+            </Row>
         </div>
     )
 

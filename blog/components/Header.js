@@ -22,10 +22,11 @@ const Header = () => {
     }, [])
     //跳转到列表页
     const handleClick = (e) => {
+        
         if (e.key == 0) {
             Router.push('/index')
         } else {
-            Router.push('/list?id=' + e.key)
+            Router.push('/list?id=' + e.key*1)
         }
     }
 
@@ -39,7 +40,7 @@ const Header = () => {
                         </Link>
 
                     </span>
-                    <span className="header-txt">前端开发工程师</span>
+                    <span className="header-txt">api调用工程师</span>
                 </Col>
 
                 <Col className="memu-div" xs={0} sm={0} md={14} lg={10} xl={10}>

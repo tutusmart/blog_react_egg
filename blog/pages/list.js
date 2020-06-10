@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-import { Row, Col, List, Icon, Breadcrumb } from 'antd'
+import { Row, Col, List, Icon, Breadcrumb ,Pagination} from 'antd'
 import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
@@ -11,13 +11,29 @@ import '../static/style/pages/list.css'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 import Link from 'next/link'
-
-const MyList = (list) => {
-
-  const [mylist, setMylist] = useState(list.data);
+const pageSize = 10;
+const MyList = (data) => {
+  const [mylist, setMylist] = useState(data.list);
+  const [total, setTotal] = useState(data.total);
+  /** 触发视图刷新方法 不可注视 */
   useEffect(() => {
-    setMylist(list.data)
+    setMylist(data.list);
+    console.log(data.total);
+    
+    setTotal(data.total);
   })
+  const onChange =  (e) => {
+    console.log(data.url.query.id);
+    axios(servicePath.getArticleList + data.url.query.id + "?pageSize="+ pageSize + "&current=" + e).then(
+      (res) => {
+        console.log(res);
+        setMylist(res.data.data.list);
+        setTotal(res.data.data.total);
+      }
+    )
+  }
+ 
+  
 
   return (
     <>
@@ -54,6 +70,7 @@ const MyList = (list) => {
                 </List.Item>
               )}
             />
+            
           </div>
         </Col>
 
@@ -61,6 +78,9 @@ const MyList = (list) => {
           <Author />
           <Advert />
         </Col>
+      </Row>
+      <Row className="tw-mrt30" type="flex" justify="center">
+        <Pagination onChange={onChange} total={total} pageSize={pageSize}/>
       </Row>
       <Footer />
 
@@ -72,9 +92,12 @@ const MyList = (list) => {
 
 MyList.getInitialProps = async (context) => {
   let id = context.query.id
+  console.log(id);
   const promise = new Promise((resolve) => {
-    axios(servicePath.getListById + id).then(
-      (res) => resolve(res.data)
+    axios(servicePath.getListById + id + "?pageSize="+ pageSize + "&current=" + 1).then(
+      (res) => {
+        resolve(res.data.data) 
+      }
     )
   })
   return await promise

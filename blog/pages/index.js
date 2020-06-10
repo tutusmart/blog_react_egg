@@ -1,6 +1,6 @@
 import '../static/style/pages/index.css'
 import React, { useState } from 'react'
-import { Row, Col, List, Icon } from 'antd'
+import { Row, Col, List, Icon ,Pagination} from 'antd'
 import axios from 'axios'
 import Head from 'next/head'
 import Header from '../components/Header'
@@ -13,9 +13,8 @@ import marked from 'marked'
 import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
 
-
-
-const Home = (list) => {
+const pageSize = 10;
+const Home = (data) => {
 
   const renderer = new marked.Renderer();
   marked.setOptions({
@@ -33,9 +32,21 @@ const Home = (list) => {
       return hljs.highlightAuto(code).value;
     }
   });
-
+  const onChange =  (e) => {
+    axios(servicePath.getArticleList + "?pageSize="+ pageSize + "&current=" + e).then(
+      (res) => {
+        setMylist(res.data.data.list);
+        setTotal(res.data.data.total);
+      }
+    )
+  }
   //---------主要代码-------------start
-  const [mylist, setMylist] = useState(list.data);
+  const [mylist, setMylist] = useState(data.list);
+  // const [current, setCurrent] = useState(data.current);
+  const [total, setTotal] = useState(data.total);
+
+  console.log(total);
+  
   //---------主要代码-------------end
   return (
     <>
@@ -78,21 +89,23 @@ const Home = (list) => {
           <Advert />
         </Col>
       </Row>
+      <Row className="tw-mrt30" type="flex" justify="center">
+          <Pagination onChange={onChange} total={total} pageSize={pageSize}/>
+        </Row>
       <Footer />
 
     </>
   )
 }
 
-Home.getInitialProps = async () => {
+Home.getInitialProps = async (c) => {
   const promise = new Promise((resolve) => {
-    axios(servicePath.getArticleList).then(
+    axios(servicePath.getArticleList + "?pageSize="+ pageSize + "&current=" + 1).then(
       (res) => {
-        resolve(res.data)
+        resolve(res.data.data) 
       }
     )
   })
-
   return await promise
 }
 
