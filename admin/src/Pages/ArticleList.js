@@ -26,8 +26,8 @@ function ArticleList(props) {
             header: { 'Access-Control-Allow-Origin': '*' }
         }).then(
             res => {
-                setList(res.data.list);
-                setTotal(res.data.total);
+                setList(res.data.data.list);
+                setTotal(res.data.data.total);
             }
         )
     }

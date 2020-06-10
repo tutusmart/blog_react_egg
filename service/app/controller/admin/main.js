@@ -1,6 +1,7 @@
 'use strict';
-const Controller = require('egg').Controller
-class MainController extends Controller {
+const BaseController = require('../base');
+
+class MainController extends BaseController {
     async index() {
         //特使登陆
         let openId = new Date().getTime()
@@ -75,16 +76,11 @@ class MainController extends Controller {
                 'ORDER BY article.id DESC ' + 
                 'LIMIT ' + pageSize * (current*1 - 1) + ',' + pageSize;;
         let sqlcout = 'SELECT COUNT(article.id) as total FROM article';
-        const resList = await this.app.mysql.query(sql);
-        const coutnums = await this.app.mysql.query(sqlcout);
-        console.log(coutnums);
-        
-        this.ctx.body={
-            total:coutnums[0].total,
-            pageSize:pageSize*1,
-            current:current*1,
-            page:Math.ceil( coutnums[0].total / pageSize*1 ),
-            list:resList
+        try{
+            let items = await this.pagesList(sql,sqlcout)
+            this.success(items);
+        }catch(error){
+            this.error(error);
         }
     }
 

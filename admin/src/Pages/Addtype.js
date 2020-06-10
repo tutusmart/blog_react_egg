@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { List, Row, Col, Modal, Button ,Card, Input, Spin, message} from 'antd';
+import { List, Row, Col, Modal, Button , Input} from 'antd';
 
 import 'antd/dist/antd.css';
 import '../static/css/Login.css';
@@ -8,7 +8,7 @@ import axios from 'axios'
 
 function AddType(props) {
     const [visible, setvisible] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+    // const [isLoading, setIsLoading] = useState(false)
     const [typeName, setTypeName] = useState('')  //markdown的编辑内容
     const [list, setList] = useState([])
     useEffect(() => {
