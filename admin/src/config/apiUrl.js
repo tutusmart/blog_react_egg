@@ -15,6 +15,7 @@ let servicePath = {
     delArticle:ipUrl + 'delArticle/' ,  //  删除文章
     getArticleById:ipUrl + 'getArticleById/' ,  //  根据ID获得文章详情
     addType : ipUrl + 'addType', //添加类别
+    updateFile: ipUrl + 'updateFile'
 }
 
 export default servicePath;

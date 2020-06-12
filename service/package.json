@@ -7,10 +7,13 @@
     "declarations": true
   },
   "dependencies": {
+    "await-stream-ready": "^1.0.1",
+    "dayjs": "^1.8.28",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.3",
     "egg-mysql": "^3.0.0",
-    "egg-scripts": "^2.11.0"
+    "egg-scripts": "^2.11.0",
+    "stream-wormhole": "^1.1.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",

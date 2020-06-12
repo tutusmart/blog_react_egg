@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+/service/app/public/
 # next.js
 /.next/
 /out/

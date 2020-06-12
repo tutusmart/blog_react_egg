@@ -1,6 +1,7 @@
 'use strict';
 const Controller = require('egg').Controller
-
+const fs = require('fs');
+const path = require('path');
 class BaseController extends Controller{
     get user(){
         return this.ctx.session.user;
@@ -40,6 +41,17 @@ class BaseController extends Controller{
             current:current*1,
             page:Math.ceil( coutnums[0].total / pageSize*1 ),
             list:resList
+        }
+    }
+    mkdirsSync(dirname) {
+        if (fs.existsSync(dirname)) { //判断路是否存在
+            return true;
+        } else {
+            if (this.mkdirsSync(path.dirname(dirname))) {//创建文件夹
+                console.log(1234);
+                fs.mkdirSync(dirname);
+                return true;
+            }
         }
     }
     success(data){

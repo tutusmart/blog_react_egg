@@ -4,7 +4,7 @@ import '../static/css/AddArticle.css'
 import { Row, Col, Input, Select, Button, DatePicker, message } from 'antd'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
-
+import moment from "moment"
 const { Option } = Select;
 const { TextArea } = Input;
 
@@ -19,7 +19,6 @@ function AddArticle(props) {
     // const [updateDate, setUpdateDate] = useState() //修改日志的日期
     const [typeInfo, setTypeInfo] = useState([]) // 文章类别信息
     const [selectedType, setSelectType] = useState('请选择类型') //选择的文章类别
-
     useEffect(() => {
         getTypeInfo();
         let tmpId;
@@ -80,7 +79,9 @@ function AddArticle(props) {
             header: { 'Access-Control-Allow-Origin': '*' }
         }).then(
             res => {
-                //let articleInfo= res.data.data[0]
+                // let articleInfo= res.data.data[0]
+                setSelectType(res.data.data[0].typeId)
+                setShowDate(moment(res.data.data[0].addTime))
                 setArticleTitle(res.data.data[0].title)
                 setArticleContent(res.data.data[0].article_content)
                 let html = marked(res.data.data[0].article_content)
@@ -88,22 +89,40 @@ function AddArticle(props) {
                 setIntroducemd(res.data.data[0].introduce)
                 let tmpInt = marked(res.data.data[0].introduce)
                 setIntroducehtml(tmpInt)
-                setShowDate(res.data.data[0].addTime)
-                setSelectType(res.data.data[0].typeId)
 
             }
         )
     }
 
+    /**
+     * 上传按钮
+     * @param {*} value 
+     */
+    const updateFile = (file)=> {
+        var forms = new FormData()
+        var configs = {
+            headers:{'Content-Type':'multipart/form-data'}
+        };
+        forms.append('file',file.target.files[0])
+        axios.post( servicePath.updateFile , forms ,configs).then(res=>{
+            setArticleContent(articleContent + `![${res.data.data.fileName}](${res.data.data.filePath})`);
+            let html = marked(articleContent + `![${res.data.data.fileName}](${res.data.data.filePath})`)
+            setMarkdownContent(html)
+        })
+    }
 
     const selectTypeHandler = (value) => {
         setSelectType(value)
     }
-
+    const update = ()=>{
+        // var event = new Event('input', { bubbles: true });
+        // element.dispatchEvent(event);
+    }
     //保存文章  (不退出页面是修改)
     const saveArticle = () => {
         // markedContent()  //先进行转换
-        if (!selectedType) {
+        debugger
+        if ( typeof selectedType  == "Number") {
             message.error('必须选择文章类别')
             return false
         } else if (!articleTitle) {
@@ -126,7 +145,8 @@ function AddArticle(props) {
         dataProps.title = articleTitle
         dataProps.article_content = articleContent
         dataProps.introduce = introducemd
-        let datetext = showDate.replace('-', '/')
+        let datetext = showDate.format("L");
+        // let datetext = showDate.replace('-', '/');
         dataProps.addTime = (new Date(datetext).getTime()) / 1000
         // dataProps.part_count = partCount
         // dataProps.article_content_html = markdownContent
@@ -184,14 +204,12 @@ function AddArticle(props) {
                                 value={articleTitle}
                                 placeholder="博客标题"
                                 onChange={e => {
-
                                     setArticleTitle(e.target.value)
                                 }}
                                 size="large" />
                         </Col>
                         <Col span={4}>
-                            &nbsp;
-                            <Select style={{width:"98%"}} defaultValue={selectedType} size="large" onChange={selectTypeHandler}>
+                            <Select style={{width:"98%"}}  value={selectedType} defaultValue={selectedType} size="large" onChange={selectTypeHandler}>
                                 {
                                     typeInfo.map((item, index) => {
                                         return (<Option key={index} value={item.id}>{item.typeName}</Option>)
@@ -226,9 +244,15 @@ function AddArticle(props) {
                 <Col span={6}>
                     <Row>
                         <Col span={24}>
+                            <Button size="large" style={{position:"relative"}}>
+                                上传图片
+                                <input type="file" style={{border:'none',opacity:0,width:"100%",position:"absolute",left:0,top:0}} onChange={updateFile} /> 
+                            </Button>
+                            &nbsp;
                             <Button size="large">暂存文章</Button>
                             &nbsp;
                             <Button type="primary" size="large" onClick={saveArticle}>发布文章</Button>
+                            &nbsp;
                             <br />
                         </Col>
                         <Col span={24}>
@@ -248,11 +272,14 @@ function AddArticle(props) {
                             </div>
                         </Col>
 
-                        <Col span={12}>
+                        <Col span={24}>
                             <div className="date-select">
                                 <DatePicker
                                     style={{width:"100%"}}
-                                    onChange={(date, dateString) => setShowDate(dateString)}
+                                    value={showDate}
+                                    onChange={(date, dateString) => { 
+                                        setShowDate(moment(dateString))
+                                    } }
                                     placeholder="发布日期"
                                     size="large"
                                 />
