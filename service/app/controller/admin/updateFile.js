@@ -38,7 +38,7 @@ class UpdataController extends BaseController {
     if(this.app.config.env == "local"){
         file.filePath = "http://127.0.0.1:" + this.app.config.cluster.listen.port + "/" + path.join(target.slice(4));
     }else{
-        file.filePath = this.app.config.cluster.listen.hostname + path.join(target.slice(4));
+        file.filePath = "http://blogserver.tuwei.site/" + path.join(target.slice(4));
     }
     file.fileName = filename;
     file.title = '图片';

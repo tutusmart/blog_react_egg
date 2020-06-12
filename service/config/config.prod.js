@@ -54,7 +54,7 @@ module.exports = appInfo => {
     listen: {
       path: '',
       port: 7001,
-      hostname: 'http://blogserver.tuwei.site/',
+      hostname: '0.0.0.0'
     }
    };
 
