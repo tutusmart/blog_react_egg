@@ -16,7 +16,7 @@ class MainController extends BaseController {
         const sql = " SELECT user_name FROM admin_user WHERE user_name = '" + userName +
             "' AND password = '" + password + "'"
 
-        const res = await this.app.mysql.query(sql)
+        const res = await this.app.mysql.query(sql);
         if (res.length > 0) {
             //登录成功,进行session缓存
             let openId = new Date().getTime()

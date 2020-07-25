@@ -11,15 +11,19 @@ class HomeController extends BaseController {
   async getArticleList() {
       let pageSize = this.ctx.query.pageSize || 10;
       let current = this.ctx.query.current || 1;
+      let type_id = this.ctx.params.id || null;
+      console.log(type_id);
       let sql = 'SELECT article.id as id,'+
               'article.title as title,'+
               'article.introduce as introduce,'+
               "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,"+
               'article.view_count as view_count ,' +
               'type.typeName as typeName '+
-              'FROM article LEFT JOIN type ON article.type_id = type.Id '+
-              'ORDER BY article.id DESC ' + 
+              'FROM article LEFT JOIN type ON article.type_id = type.Id ' + 
+              (type_id ?  'WHERE article.type_id=' + type_id  : '' ) + //有type_id 就传入type_id 没有就不筛选了
+              ' ORDER BY article.id DESC ' + //根据id 倒叙排序
               'LIMIT ' + pageSize * (current * 1 - 1) + ',' + pageSize;
+        console.log(sql);
         let sqlcout = 'SELECT COUNT(article.id) as total FROM article';
         try{
           let items = await this.pagesList(sql,sqlcout)

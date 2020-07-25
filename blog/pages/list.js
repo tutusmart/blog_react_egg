@@ -13,25 +13,28 @@ import servicePath from '../config/apiUrl'
 import Link from 'next/link'
 const pageSize = 10;
 const MyList = (data) => {
-  const [mylist, setMylist] = useState(data.list);
-  const [total, setTotal] = useState(data.total);
-  /** 触发视图刷新方法 不可注视 */
-  useEffect(() => {
-    setMylist(data.list);
-    console.log(data.total);
+    const [mylist, setMylist] = useState(data.list);
+    const [total, setTotal] = useState(data.total);
+   /** 触发视图刷新方法 不可注视 */
+    useEffect(() => {
+        // setMylist(data.list);
+        // console.log(data.total);
+    },[]);//这里的[]是useEffect第二个参数 目的是为了防止 数据改变后刷新试图
     
-    setTotal(data.total);
-  })
-  const onChange =  (e) => {
-    console.log(data.url.query.id);
-    axios(servicePath.getArticleList + data.url.query.id + "?pageSize="+ pageSize + "&current=" + e).then(
-      (res) => {
-        console.log(res);
-        setMylist(res.data.data.list);
-        setTotal(res.data.data.total);
-      }
+
+    const onChange =  (e) => {
+        console.log(data.url.query.id);
+        axios(servicePath.getArticleList + data.url.query.id + "?pageSize="+ pageSize + "&current=" + e).then(
+        (res) => {
+            console.log(res);
+            setMylist(res.data.data.list);
+            setTotal(res.data.data.total);
+        }
     )
   }
+
+ 
+
  
   
 

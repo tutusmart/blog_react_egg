@@ -7,7 +7,8 @@ import axios from 'axios'
 import servicePath from '../config/apiUrl'
 
 const Header = () => {
-    const [navArray, setNavArray] = useState([])
+    const [navArray, setNavArray] = useState([]);
+    const [index,setIndex] = useState(['0'])
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(servicePath.getTypeInfo).then(
@@ -22,7 +23,7 @@ const Header = () => {
     }, [])
     //跳转到列表页
     const handleClick = (e) => {
-        
+        setIndex([e.key])
         if (e.key == 0) {
             Router.push('/index')
         } else {
@@ -46,9 +47,10 @@ const Header = () => {
                 <Col className="memu-div" xs={0} sm={0} md={14} lg={10} xl={10}>
                     <Menu
                         mode="horizontal"
+                        selectedKeys={index}
                         onClick={handleClick}
                     >
-                        <Menu.Item key="0">
+                        <Menu.Item key="0" >
                             <Icon type="home" />
                             博客首页
                         </Menu.Item>

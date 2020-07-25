@@ -121,7 +121,6 @@ function AddArticle(props) {
     //保存文章  (不退出页面是修改)
     const saveArticle = () => {
         // markedContent()  //先进行转换
-        debugger
         if ( typeof selectedType  == "Number") {
             message.error('必须选择文章类别')
             return false
