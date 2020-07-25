@@ -17,9 +17,9 @@ const MyList = (data) => {
     const [total, setTotal] = useState(data.total);
    /** 触发视图刷新方法 不可注视 */
     useEffect(() => {
-        // setMylist(data.list);
-        // console.log(data.total);
-    },[]);//这里的[]是useEffect第二个参数 目的是为了防止 数据改变后刷新试图
+        setMylist(data.list);
+        setTotal(data.total);
+    });//这里的[]是useEffect第二个参数 目的是为了防止 数据改变后刷新试图
     
 
     const onChange =  (e) => {
