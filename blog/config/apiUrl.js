@@ -3,8 +3,8 @@ let ipUrl = '';
 if (process.env.NODE_ENV === 'production') {
     ipUrl = 'http://106.54.141.244:7001/default/'
 } else {
-    // ipUrl = 'http://106.54.141.244:7001/default/'
-    ipUrl = 'http://127.0.0.1:7001/default/'
+    ipUrl = 'http://106.54.141.244:7001/default/'
+    // ipUrl = 'http://127.0.0.1:7001/default/'
 }
 
 let servicePath = {
