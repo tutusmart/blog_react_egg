@@ -12,7 +12,7 @@
     "antd": "^3.26.6",
     "axios": "^0.19.1",
     "babel-plugin-import": "^1.13.0",
-    "highlight.js": "^9.17.1",
+    "highlight.js": "^10.4.1",
     "lodash": "^4.17.15",
     "marked": "^0.8.0",
     "next": "9.1.7",
